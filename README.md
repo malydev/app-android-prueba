@@ -1,31 +1,23 @@
-# NOVA · Banca simulada
+# App de prueba
 
-Aplicación Android en Kotlin y Jetpack Compose. Sin servidor ni operaciones reales.
-
-## Acceso
-
-- Correo: `demo@nova.com`
-- Contraseña: `Nova123`
+Aplicación Android en Kotlin y Jetpack Compose
 
 ## Arquitectura
 
 - `domain`: modelos, contrato del repositorio y validación del formulario; sin dependencias Android.
 - `data`: repositorio en memoria, credenciales simuladas y latencia artificial.
-- `presentation`: ViewModel con StateFlow y estados Idle, Loading, Success y Error; pantallas Compose y Navigation Compose.
+- `presentation/login`, `home`, `detail`: cada funcionalidad tiene su pantalla y su propio ViewModel.
+- `presentation/navigation`: define destinos y conecta estado y acciones con cada pantalla.
+- `presentation/session`: controla el cierre y la observación de la sesión.
+- `presentation/components`: componentes visuales compartidos.
+- `presentation/common`: estados Idle, Loading, Success y Error, conversión de errores y formato de importes.
+- `di`: fábrica que inyecta el repositorio en los ViewModels.
+- `BankApplication`: crea las dependencias compartidas durante la vida del proceso.
 - `ui/theme`: tema visual.
 
-El repositorio se inyecta mediante una fábrica de ViewModel. La UI observa el estado respetando el ciclo de vida. Los importes usan BigDecimal. El ViewModel conserva la sesión al rotar; al morir el proceso se requiere iniciar sesión de nuevo. La contraseña no se persiste y se borra después de ingresar.
+Cada pantalla recibe datos y callbacks, sin acceder al repositorio ni al controlador de navegación. Los ViewModels de pantalla pertenecen a su destino de navegación y se liberan al retirarlo del historial. Los modelos, el validador y los datos simulados están en archivos separados.
 
-## Prueba manual
-
-1. Enviar campos vacíos o correo inválido: deben aparecer errores junto al campo.
-2. Ingresar una contraseña incorrecta de seis o más caracteres: aparece Loading y luego Error; corregir o reintentar.
-3. Usar las credenciales de arriba: navega a la cuenta, carga saldo y lista LazyColumn.
-4. Tocar un movimiento: carga el detalle con importe, fecha, origen/destino y referencia. Volver regresa a la lista.
-5. Pulsar «Simular un error de carga» al final de la lista: aparece Loading y luego Error. «Reintentar» recupera los datos.
-6. «Actualizar» vuelve a cargar la cuenta. Rotar conserva el estado. «Cerrar sesión» limpia la sesión y el historial de navegación.
-
-La lista tiene claves estables. La carga de detalle también maneja errores y permite reintentar. Los errores de cuenta son deterministas y solo se provocan desde el control de demostración.
+El repositorio se inyecta mediante una fábrica de ViewModel. La UI observa el estado respetando el ciclo de vida. Los importes usan BigDecimal. El repositorio compartido conserva la sesión al rotar; al morir el proceso se requiere iniciar sesión de nuevo. La contraseña no se persiste y se borra después de ingresar.
 
 ## Verificación sin ejecutar la aplicación
 
