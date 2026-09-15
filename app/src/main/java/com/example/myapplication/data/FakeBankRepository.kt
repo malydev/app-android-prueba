@@ -16,16 +16,22 @@ class FakeBankRepository : BankRepository {
         }
         session.value = true
     }
+
     override suspend fun account(simulateFailure: Boolean): Account {
         delay(1000)
         check(session.value) { "Tu sesión ha terminado. Inicia sesión nuevamente." }
         check(!simulateFailure) { "No pudimos cargar tu cuenta. Revisa tu conexión e inténtalo de nuevo." }
         return data
     }
+
     override suspend fun movement(id: String): BankMovement {
         delay(500)
         check(session.value) { "Tu sesión ha terminado." }
-        return data.movements.firstOrNull { it.id == id } ?: error("No encontramos este movimiento.")
+        return data.movements.firstOrNull { it.id == id }
+            ?: error("No encontramos este movimiento.")
     }
-    override fun logout() { session.value = false }
+
+    override fun logout() {
+        session.value = false
+    }
 }

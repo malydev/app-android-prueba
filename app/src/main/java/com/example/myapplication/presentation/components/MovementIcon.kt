@@ -16,7 +16,18 @@ import com.example.myapplication.presentation.components.*
 
 @Composable
 internal fun MovementIcon(movement: BankMovement) {
-    Box(Modifier.size(44.dp).background(if (movement.amount.signum() > 0) Color(0xFFE0F1E5) else Color(0xFFF0F1EC), CircleShape), contentAlignment = Alignment.Center) {
-        Text(if (movement.amount.signum() > 0) "↙" else "↗", fontSize = 24.sp, color = MaterialTheme.colorScheme.primary)
+    Box(
+        Modifier
+            .size(44.dp)
+            .background(
+                if (movement.amount.signum() > 0) Color(0xFFE0F1E5) else Color(0xFFF0F1EC),
+                CircleShape
+            ), contentAlignment = Alignment.Center
+    ) {
+        Text(
+            if (movement.amount.signum() > 0) "↙" else "↗",
+            fontSize = 24.sp,
+            color = MaterialTheme.colorScheme.primary
+        )
     }
 }

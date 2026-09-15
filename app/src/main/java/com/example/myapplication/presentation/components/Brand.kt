@@ -17,8 +17,16 @@ import com.example.myapplication.presentation.components.*
 
 @Composable
 internal fun Brand() {
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-        Box(Modifier.size(38.dp).background(MaterialTheme.colorScheme.primary, RoundedCornerShape(12.dp)), contentAlignment = Alignment.Center) { Text("N", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 24.sp) }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        Box(
+            Modifier
+                .size(38.dp)
+                .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(12.dp)),
+            contentAlignment = Alignment.Center
+        ) { Text("N", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 24.sp) }
         Text("NOVA", fontSize = 22.sp, fontWeight = FontWeight.Bold, letterSpacing = 3.sp)
     }
 }

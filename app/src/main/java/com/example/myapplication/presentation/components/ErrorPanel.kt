@@ -13,8 +13,18 @@ import com.example.myapplication.presentation.components.*
 
 @Composable
 internal fun ErrorPanel(message: String, retry: () -> Unit) {
-    Column(Modifier.fillMaxSize().padding(32.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-        Text("Algo salió mal", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            "Algo salió mal",
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold
+        )
         Spacer(Modifier.height(12.dp)); Text(message)
         Spacer(Modifier.height(24.dp)); Button(onClick = retry) { Text("Reintentar") }
     }

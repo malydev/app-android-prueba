@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                BankApp((application as BankApplication).viewModelFactory)
+                BankApp((application as BankApplication).repository)
             }
         }
     }

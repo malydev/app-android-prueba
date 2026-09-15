@@ -12,7 +12,13 @@ import com.example.myapplication.presentation.components.*
 
 @Composable
 internal fun LoadingPanel(message: String) {
-    Column(Modifier.fillMaxSize().padding(32.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
         CircularProgressIndicator(); Spacer(Modifier.height(20.dp)); Text(message)
     }
 }

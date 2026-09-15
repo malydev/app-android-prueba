@@ -16,6 +16,8 @@ class HomeViewModel(private val repository: BankRepository) : ViewModel() {
     fun loadAccount(simulateFailure: Boolean = false) {
         if (accountJob?.isActive == true) return
         _account.value = UiState.Loading
-        accountJob = viewModelScope.launch { _account.value = loadResult { repository.account(simulateFailure) } }
+        accountJob = viewModelScope.launch {
+            _account.value = loadResult { repository.account(simulateFailure) }
+        }
     }
 }
